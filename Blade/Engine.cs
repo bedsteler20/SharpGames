@@ -17,7 +17,21 @@ public class Engine {
         }
     }
 
+    /// <summary>
+    /// Starts the game engine with the specified screen.
+    /// </summary>
+    /// <param name="screen">The screen to start the engine with.</param>
     public static void Start(Screen screen) {
+
+        // Reset the console on exit
+        AppDomain.CurrentDomain.ProcessExit += new EventHandler((sender, e) => {
+            Console.CursorVisible = true;
+            Console.ResetColor();
+            Console.Clear();
+        });
+
+        Console.CursorVisible = false;
+
         if (OperatingSystem.IsWindows()) {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
         }
@@ -30,5 +44,6 @@ public class Engine {
             Environment.Exit(0);
         }
     }
+
 
 }

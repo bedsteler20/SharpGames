@@ -75,8 +75,15 @@ public abstract class Drawable {
     /// <param name="height">The height of the rectangle.</param>
     /// <returns>A tuple containing the x and y coordinates of the center of the rectangle.</returns>
     public (int x, int y) GetCenter(int width, int height) {
-        return ((Console.WindowWidth - width) / 2,
-                (Console.WindowHeight - height) / 2);
+        int x = (Console.WindowWidth - width) / 2;
+        int y = (Console.WindowHeight - height) / 2;
+        if (x % 2 == 1) {
+            x--;
+        }
+        if (y % 2 == 1) {
+            y--;
+        }
+        return (x, y);
     }
 
     public void MoveCursor(int x, int y) {

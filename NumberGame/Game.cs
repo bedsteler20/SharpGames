@@ -1,7 +1,4 @@
-﻿
-
-
-namespace NumberGame;
+﻿namespace NumberGame;
 public class Game : Blade.Screen {
     public override Blade.UpdateStrategy updateStrategy => Blade.UpdateStrategy.Lazy;
 
@@ -15,6 +12,10 @@ public class Game : Blade.Screen {
 
     private Blade.Leaderboard Leaderboard;
 
+    const int WIDTH = 50;
+    const int HEIGHT = 18;
+
+    public override (int x, int y) Offset => GetCenter(WIDTH, HEIGHT);
 
     public Game(int bordSize, Blade.Leaderboard leaderboard) {
         BordSize = bordSize;
@@ -66,10 +67,23 @@ public class Game : Blade.Screen {
 
     public void AfterMove() {
         if (!HasEmptyCell()) {
-            Blade.Signals.Transition(new Menu());
+            ExitGame();
         } else {
             SpawnCell();
         }
+    }
+
+    public void ExitGame() {
+        Blade.Signals.Transition(new Blade.TextBox() {
+            Title = "Game Over",
+            BackgroundColor = ConsoleColor.Red,
+            OnSubmit = (sender, text) => {
+                Leaderboard.AddScore(text, score);
+                Leaderboard.Save();
+                Blade.Signals.Transition(new MainMenu());
+            },
+            OnCancel = () => Blade.Signals.Transition(new MainMenu())
+        });
     }
 
 

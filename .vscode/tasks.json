@@ -6,6 +6,14 @@
             "task": "build",
             "problemMatcher": ["$msCompile"],
             "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": true,
+                "clear": false
+            },
             "label": "dotnet: build"
         }
     ]

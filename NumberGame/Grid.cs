@@ -9,6 +9,9 @@ class Grid : Blade.Drawable {
         Cells = cells; Offset = (0, 0);
 
     }
+    const int WIDTH = 50;
+    const int HEIGHT = 18;
+    public override (int x, int y) Offset => GetCenter(WIDTH, HEIGHT);
 
     public override void Draw() {
         // I have no idea how what any of this numbers do but it works
