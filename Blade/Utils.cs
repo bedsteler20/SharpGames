@@ -34,7 +34,7 @@ public class Utils {
 
     public static string GetAppFile(string appName, string file) {
         var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        var appDir = Path.Combine(appData, appName);
+        var appDir = Path.Combine(appData, "Blade", appName);
         if (!Directory.Exists(appDir)) {
             Directory.CreateDirectory(appDir);
         }

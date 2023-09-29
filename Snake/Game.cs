@@ -11,6 +11,10 @@ enum Direction {
 public class Game : Blade.Screen {
     const int CELLS_X = 15;
     const int CELLS_Y = 15;
+    const int HEIGHT = CELLS_Y + 3;
+    const int WIDTH = (CELLS_X * 2) + 2;
+
+    public override (int x, int y) Offset => GetCenter(WIDTH, HEIGHT);
 
     private readonly Random Rng = Blade.Utils.CreateRadom();
 
@@ -48,6 +52,7 @@ public class Game : Blade.Screen {
                 BackgroundColor = ConsoleColor.Green,
                 OnSubmit = (sender, text) => {
                     leaderboard.AddScore(text, score);
+                    leaderboard.Save();
                     Blade.ScreenManager.Back<Menu>();
                 },
                 OnCancel = () => {
@@ -141,6 +146,4 @@ public class Game : Blade.Screen {
             Paint(x * 3 + 1, y + 2, " ■ ", ConsoleColor.Green);
         }
     }
-
-
 }
