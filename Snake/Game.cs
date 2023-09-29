@@ -81,7 +81,7 @@ public class Game : Blade.Screen {
     public override void Update() {
         base.Update();
         frame++;
-        if (frame % 6 == 0) {
+        if (frame % 4 == 0) {
             Move();
         }
     }
@@ -117,27 +117,28 @@ public class Game : Blade.Screen {
 
     public override void Draw() {
         base.Draw();
-        Paint(food.x * 3 + 1, food.y + 1, " O ", ConsoleColor.Red);
+        Paint(0, 0, $"Score: {score}", ConsoleColor.Green);
+        Paint(food.x * 3 + 1, food.y + 2, " O ", ConsoleColor.Red);
 
-        Paint(0, 0, "┏");
+        Paint(0, 1, "┏");
         for (int x = 0; x < CELLS_X; x++) {
-            Paint(x * 3 + 1, 0, "━━━");
+            Paint(x * 3 + 1, 1, "━━━");
         }
-        Paint(CELLS_X * 3 + 1, 0, "┓");
+        Paint(CELLS_X * 3 + 1, 1, "┓");
         for (int y = 0; y < CELLS_Y; y++) {
-            Paint(0, y + 1, "┃");
+            Paint(0, y + 2, "┃");
         }
         for (int y = 0; y < CELLS_Y; y++) {
-            Paint(CELLS_X * 3 + 1, y + 1, "┃");
+            Paint(CELLS_X * 3 + 1, y + 2, "┃");
         }
-        Paint(0, CELLS_Y + 1, "┗");
+        Paint(0, CELLS_Y + 2, "┗");
         for (int x = 0; x < CELLS_X; x++) {
-            Paint(x * 3 + 1, CELLS_Y + 1, "━━━");
+            Paint(x * 3 + 1, CELLS_Y + 2, "━━━");
         }
-        Paint(CELLS_X * 3 + 1, CELLS_Y + 1, "┛");
+        Paint(CELLS_X * 3 + 1, CELLS_Y + 2, "┛");
 
         foreach (var (x, y) in snake) {
-            Paint(x * 3 + 1, y + 1, " ■ ", ConsoleColor.Green);
+            Paint(x * 3 + 1, y + 2, " ■ ", ConsoleColor.Green);
         }
     }
 

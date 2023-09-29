@@ -20,7 +20,6 @@ public static class ScreenManager {
     }
 
     public static void Run() {
-
         Task consoleKeyTask = Task.Run(() => {
             while (true) {
                 ConsoleKeyInfo key = Console.ReadKey(true);
@@ -29,9 +28,9 @@ public static class ScreenManager {
         });
 
         while (true) {
+            CurrentScreen.Update();
             Console.Clear();
             CurrentScreen.Draw();
-            CurrentScreen.Update();
             Thread.Sleep(1000 / 10);
         }
 
