@@ -21,17 +21,6 @@ public abstract class Screen : Drawable {
     abstract public UpdateStrategy updateStrategy { get; }
     public virtual bool ShowCursor { get; } = false;
 
-    public void Run() {
-        switch (updateStrategy) {
-            case UpdateStrategy.FixedRate:
-                RunFixedRate();
-                break;
-            case UpdateStrategy.Lazy:
-                RunLazy();
-                break;
-        }
-    }
-
 
     public virtual void Update() {
         if (ShowCursor) {
@@ -46,46 +35,4 @@ public abstract class Screen : Drawable {
     /// </summary>
     /// <param name="key">The key that was pressed.</param>
     public virtual void OnKeyPress(ConsoleKeyInfo key) { }
-
-    /// <summary>
-    /// Runs on every frame after the Update() method
-    /// </summary>
-    public override void Draw() {
-        Console.Clear();
-        base.Draw();
-    }
-
-
-    private void RunFixedRate() {
-        try {
-            Task consoleKeyTask = Task.Run(() => {
-                while (true) {
-                    ConsoleKeyInfo key = Console.ReadKey(true);
-                    OnKeyPress(key);
-                }
-            });
-
-            while (true) {
-                Draw();
-                Update();
-                Thread.Sleep(1000 / 10);
-            }
-        } catch (ExitSignal) {
-            Console.Clear();
-        }
-    }
-
-    private void RunLazy() {
-        try {
-            while (true) {
-                Draw();
-                Update();
-                ConsoleKeyInfo key = Console.ReadKey(true);
-                OnKeyPress(key);
-
-            }
-        } catch (ExitSignal) {
-            Console.Clear();
-        }
-    }
 }

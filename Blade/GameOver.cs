@@ -7,7 +7,7 @@ class GameOver : Screen {
 
     public override (int x, int y) Offset => GetCenter(WIDTH, HEIGHT);
 
-    public required Action OnGameOver;
+    public required virtual Action OnGameOver { get; set; }
 
     public override void Draw() {
         base.Draw();

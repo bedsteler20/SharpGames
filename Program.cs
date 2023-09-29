@@ -2,24 +2,16 @@
 
 class MainMenu : Blade.Menu {
     public override Dictionary<string, Action> Options => new() {
-        ["Number Game"] = () => Blade.Signals.Transition(new NumberGame.Menu()),
-        ["Snake"] = () => Blade.Signals.Transition(new Snake.Menu()),
-        ["Exit"] = () => Blade.Signals.Exit()
+        ["Number Game"] = () => Blade.ScreenManager.AddScreen(new NumberGame.Menu()),
+        ["Snake"] = () => Blade.ScreenManager.AddScreen(new Snake.Menu()),
+        ["Exit"] = () => Environment.Exit(0)
     };
 }
 
 
 class Program {
     public static void Main() {
-        // var menu = new Snake.Game();
-        // var menu = new Blade.TextBox() {
-        //     OnSubmit = (sender, text) => {
-        //         if (text == "exit") {
-        //             Blade.Signals.Exit();
-        //         }
-        //     },
-        //     OnCancel = () => Blade.Signals.Exit(),
-        // };
-        Blade.Engine.Start(new MainMenu());
+        Blade.ScreenManager.AddScreen(new MainMenu());
+        Blade.ScreenManager.Run();
     }
 }

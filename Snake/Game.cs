@@ -1,5 +1,3 @@
-
-
 namespace Snake;
 
 enum Direction {
@@ -27,12 +25,10 @@ public class Game : Blade.Screen {
 
     private (int x, int y) food;
     private readonly Blade.Leaderboard leaderboard;
-    private readonly Menu menu;
 
     private (int x, int y)[] snake = new[] { (9, 9), (9, 8), (9, 7), (9, 6) };
-    public Game(Menu menu) {
-        this.menu = menu;
-        leaderboard = menu.Leaderboard;
+    public Game(Blade.Leaderboard leaderboard) {
+        this.leaderboard = leaderboard;
         SpawnFood();
     }
 
@@ -47,27 +43,19 @@ public class Game : Blade.Screen {
     }
 
     private void GameOver() {
-        Blade.Signals.Transition(new Blade.GameOver() {
-            OnGameOver = () => {
-                Blade.Signals.Transition(new Blade.TextBox() {
-                    BackgroundColor = ConsoleColor.Green,
-                    OnSubmit = (sender, text) => {
-                        leaderboard.AddScore(text, score);
-                        Blade.Signals.Transition(new Blade.LeaderboardMenu() {
-                            Leaderboard = leaderboard,
-                            bgColor = ConsoleColor.Green,
-                            Close = () => {
-                                Blade.Signals.Transition(menu);
-                            }
-                        });
-
-                    },
-                    OnCancel = () => {
-                        Blade.Signals.Transition(menu);
-                    }
-                });
-            }
-        });
+        var gameOverScreen = new Blade.GameOver() {
+            OnGameOver = () => Blade.ScreenManager.AddScreen(new Blade.TextBox() {
+                BackgroundColor = ConsoleColor.Green,
+                OnSubmit = (sender, text) => {
+                    leaderboard.AddScore(text, score);
+                    Blade.ScreenManager.Back<Menu>();
+                },
+                OnCancel = () => {
+                    Blade.ScreenManager.Back<Menu>();
+                }
+            })
+        };
+        Blade.ScreenManager.AddScreen(gameOverScreen);
     }
 
 

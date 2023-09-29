@@ -1,5 +1,6 @@
 
 
+
 namespace Snake;
 
 public class Menu : Blade.Menu {
@@ -7,12 +8,12 @@ public class Menu : Blade.Menu {
     public override ConsoleColor BackgroundColor => ConsoleColor.Green;
 
     public override Dictionary<string, Action> Options => new() {
-        ["Play"] = () => Blade.Signals.Transition(new Game(this)),
-        ["Leaderboard"] = () => Blade.Signals.Transition(new Blade.LeaderboardMenu() {
+        ["Play"] = () => Blade.ScreenManager.AddScreen(new Game(Leaderboard)),
+        ["Leaderboard"] = () => Blade.ScreenManager.AddScreen(new Blade.LeaderboardMenu() {
             bgColor = ConsoleColor.Green,
             Leaderboard = Leaderboard,
-            Close = () => Blade.Signals.Transition(this)
+            Close = () => Blade.ScreenManager.Back()
         }),
-        ["Exit"] = () => Blade.Signals.Transition(new MainMenu())
+        ["Exit"] = () => Blade.ScreenManager.Back()
     };
 }

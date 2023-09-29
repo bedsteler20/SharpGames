@@ -57,7 +57,7 @@ public class Game : Blade.Screen {
                 AfterMove();
                 break;
             case ConsoleKey.Escape:
-                Blade.Signals.Transition(new Menu());
+                Blade.ScreenManager.Back<Menu>();
                 break;
             default:
                 break;
@@ -74,15 +74,15 @@ public class Game : Blade.Screen {
     }
 
     public void ExitGame() {
-        Blade.Signals.Transition(new Blade.TextBox() {
+        Blade.ScreenManager.AddScreen(new Blade.TextBox() {
             Title = "Game Over",
             BackgroundColor = ConsoleColor.Red,
             OnSubmit = (sender, text) => {
                 Leaderboard.AddScore(text, score);
                 Leaderboard.Save();
-                Blade.Signals.Transition(new MainMenu());
+                Blade.ScreenManager.Back<Menu>();
             },
-            OnCancel = () => Blade.Signals.Transition(new MainMenu())
+            OnCancel = () => Blade.ScreenManager.Back<Menu>(),
         });
     }
 

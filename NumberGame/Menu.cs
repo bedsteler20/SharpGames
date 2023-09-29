@@ -5,11 +5,11 @@ public class Menu : Blade.Menu {
     public Blade.Leaderboard leaderboard = new("NumberGame");
 
     public override Dictionary<string, Action> Options => new() {
-        ["Play"] = () => Blade.Signals.Transition(new NumberGame.Game(4, leaderboard)),
-        ["Leaderboard"] = () => Blade.Signals.Transition(new Blade.LeaderboardMenu() {
+        ["Play"] = () => Blade.ScreenManager.AddScreen(new Game(4, leaderboard)),
+        ["Leaderboard"] = () => Blade.ScreenManager.AddScreen(new Blade.LeaderboardMenu() {
             Leaderboard = leaderboard,
-            Close = () => Blade.Signals.Transition(this)
+            Close = () => Blade.ScreenManager.Back()
         }),
-        ["Exit"] = () => Blade.Signals.Transition(new MainMenu()),
+        ["Exit"] = () => Blade.ScreenManager.Back(),
     };
 }
