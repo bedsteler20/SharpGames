@@ -1,8 +1,6 @@
 namespace Blade;
 
 class GameOver : Screen {
-    public override UpdateStrategy updateStrategy => UpdateStrategy.Lazy;
-
     const int HEIGHT = 11, WIDTH = 38;
 
     public override (int x, int y) Offset => GetCenter(WIDTH, HEIGHT);

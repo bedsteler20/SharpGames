@@ -19,7 +19,7 @@ public enum UpdateStrategy {
 /// </summary>
 public abstract class Screen : Drawable {
     [Obsolete("All screens are now fixed rate.")]
-    abstract public UpdateStrategy updateStrategy { get; }
+    public virtual UpdateStrategy updateStrategy => UpdateStrategy.FixedRate;
     public virtual bool ShowCursor { get; } = false;
 
 

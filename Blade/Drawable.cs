@@ -90,4 +90,28 @@ public abstract class Drawable {
         Console.SetCursorPosition(x + Offset.x, y + Offset.y);
     }
 
+    public void PaintRect(int x1, int y1, int x2, int y2, string c) {
+        for (int x = x1; x <= x2; x++) {
+            for (int y = y1; y <= y2; y++) {
+                Paint(x, y, c);
+            }
+        }
+    }
+
+    public void DrawBorder(int width, int height, int xOff = 0, int yOff = 0) {
+        Paint(xOff, yOff, "┏");
+        Paint(xOff, height + 1 + yOff, "┗");
+        Paint(width + 1 + xOff, height + 1 + yOff, "┛");
+        Paint(width + 1 + xOff, yOff, "┓");
+
+        for (int x = xOff; x < width + xOff; x++) {
+            Paint(x + 1, yOff, "━");
+            Paint(x + 1, height + 1 + yOff, "━");
+        }
+        for (int y = yOff; y < height + yOff; y++) {
+            Paint(xOff, y + 1, "┃");
+            Paint(width + 1 + xOff, y + 1, "┃");
+        }
+
+    }
 }

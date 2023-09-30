@@ -12,13 +12,12 @@ public class Game : Blade.Screen {
     const int CELLS_X = 15;
     const int CELLS_Y = 15;
     const int HEIGHT = CELLS_Y + 3;
-    const int WIDTH = (CELLS_X * 2) + 2;
+    const int WIDTH = (CELLS_X * 3) + 2;
 
     public override (int x, int y) Offset => GetCenter(WIDTH, HEIGHT);
 
     private readonly Random Rng = Blade.Utils.CreateRadom();
 
-    public override Blade.UpdateStrategy updateStrategy => Blade.UpdateStrategy.FixedRate;
 
     private Direction Direction = Direction.Right;
     private int frame = 0;
@@ -80,6 +79,9 @@ public class Game : Blade.Screen {
             case ConsoleKey.RightArrow:
                 Direction = Direction.Right;
                 break;
+            case ConsoleKey.Escape:
+                Blade.ScreenManager.Back<Menu>();
+                break;
         }
     }
 
@@ -125,22 +127,7 @@ public class Game : Blade.Screen {
         Paint(0, 0, $"Score: {score}", ConsoleColor.Green);
         Paint(food.x * 3 + 1, food.y + 2, " O ", ConsoleColor.Red);
 
-        Paint(0, 1, "┏");
-        for (int x = 0; x < CELLS_X; x++) {
-            Paint(x * 3 + 1, 1, "━━━");
-        }
-        Paint(CELLS_X * 3 + 1, 1, "┓");
-        for (int y = 0; y < CELLS_Y; y++) {
-            Paint(0, y + 2, "┃");
-        }
-        for (int y = 0; y < CELLS_Y; y++) {
-            Paint(CELLS_X * 3 + 1, y + 2, "┃");
-        }
-        Paint(0, CELLS_Y + 2, "┗");
-        for (int x = 0; x < CELLS_X; x++) {
-            Paint(x * 3 + 1, CELLS_Y + 2, "━━━");
-        }
-        Paint(CELLS_X * 3 + 1, CELLS_Y + 2, "┛");
+        DrawBorder(CELLS_X * 3, CELLS_Y, 0, 1);
 
         foreach (var (x, y) in snake) {
             Paint(x * 3 + 1, y + 2, " ■ ", ConsoleColor.Green);
