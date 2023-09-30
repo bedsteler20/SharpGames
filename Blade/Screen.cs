@@ -18,6 +18,7 @@ public enum UpdateStrategy {
 /// Represents a screen that can be drawn on the console and updated at a fixed rate or lazily.
 /// </summary>
 public abstract class Screen : Drawable {
+    [Obsolete("All screens are now fixed rate.")]
     abstract public UpdateStrategy updateStrategy { get; }
     public virtual bool ShowCursor { get; } = false;
 
