@@ -1,6 +1,6 @@
 namespace NumberGame;
 public class Menu : Blade.Menu {
-    public override string Title => "Number Game";
+    public override string Title => "2048";
     public override ConsoleColor BackgroundColor => ConsoleColor.Red;
     public Blade.Leaderboard leaderboard = new("NumberGame");
 

@@ -2,7 +2,7 @@
 
 class MainMenu : Blade.Menu {
     public override Dictionary<string, Action> Options => new() {
-        ["Number Game"] = () => Blade.ScreenManager.AddScreen(new NumberGame.Menu()),
+        ["2048"] = () => Blade.ScreenManager.AddScreen(new NumberGame.Menu()),
         ["Snake"] = () => Blade.ScreenManager.AddScreen(new Snake.Menu()),
         ["Exit"] = () => Environment.Exit(0)
     };
