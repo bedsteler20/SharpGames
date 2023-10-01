@@ -21,6 +21,7 @@ public abstract class Screen : Drawable {
     [Obsolete("All screens are now fixed rate.")]
     public virtual UpdateStrategy updateStrategy => UpdateStrategy.FixedRate;
     public virtual bool ShowCursor { get; } = false;
+    public virtual int UpdateRate { get; } = 1000 / 60;
 
 
     public virtual void Update() {

@@ -12,6 +12,11 @@ public class AudioPlayer {
         lib = new();
         player = new(lib);
         player.EndReached += OnEndReached;
+
+        var envVar = Environment.GetEnvironmentVariable("BLADE_NO_SOUND");
+        if (envVar != null && envVar == "1" || envVar == "true") {
+            player.Volume = 0;
+        }
     }
 
     public void Play(string path) {

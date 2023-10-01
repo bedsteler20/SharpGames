@@ -86,6 +86,11 @@ public abstract class Drawable {
         return (x, y);
     }
 
+    public (int x, int y) GetCenter(int x, int y, int yOff, int xOff) {
+        var (cx, cy) = GetCenter(x, y);
+        return (cx + xOff, cy + yOff);
+    }
+
     public void MoveCursor(int x, int y) {
         Console.SetCursorPosition(x + Offset.x, y + Offset.y);
     }
@@ -94,6 +99,14 @@ public abstract class Drawable {
         for (int x = x1; x <= x2; x++) {
             for (int y = y1; y <= y2; y++) {
                 Paint(x, y, c);
+            }
+        }
+    }
+
+    public void PaintRect(int x1, int y1, int x2, int y2, string c, ConsoleColor foreground) {
+        for (int x = x1; x <= x2; x++) {
+            for (int y = y1; y <= y2; y++) {
+                Paint(x, y, c, foreground);
             }
         }
     }

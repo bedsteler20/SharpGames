@@ -10,4 +10,7 @@
       <PackageReference Include="LibVLCSharp" Version="3.8.0" />
       <PackageReference Include="VideoLAN.LibVLC.Windows" Version="3.0.18" />
     </ItemGroup>
+    <ItemGroup>
+        <None Include="Assets/*" CopyToOutputDirectory="Always" />
+    </ItemGroup>
 </Project>

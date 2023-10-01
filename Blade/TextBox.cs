@@ -7,6 +7,7 @@ enum Focus { Cancel, Submit, Text }
 public class TextBox : Screen {
     public override bool ShowCursor => focus == Focus.Text;
     public override (int x, int y) Offset => GetCenter(Width, Height);
+    public override int UpdateRate => 1000 / 10;
 
     public string Title { get; set; } = "";
     public ConsoleColor BackgroundColor { get; set; } = ConsoleColor.Yellow;

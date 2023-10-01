@@ -11,7 +11,7 @@ public abstract class Menu : Screen {
     public virtual string Title { get; } = "Menu";
     public virtual ConsoleColor BackgroundColor { get; set; } = ConsoleColor.Yellow;
     public override (int, int) Offset => GetCenter(WIDTH, height);
-
+    public override int UpdateRate => 1000 / 10;
 
 
     public Menu() {

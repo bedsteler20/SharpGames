@@ -54,12 +54,44 @@ public static class ScreenManager {
                 CurrentScreen.OnKeyPress(key);
             }
         });
-
         while (true) {
             CurrentScreen.Update();
-            Console.Clear();
-            CurrentScreen.Draw();
-            Thread.Sleep(1000 / 10);
+            TryDraw();
+            Thread.Sleep(CurrentScreen.UpdateRate);
         }
+    }
+
+    private static ToSmallMessage errScreen = new();
+    private static void TryDraw() {
+        Console.Clear();
+        try {
+            CurrentScreen.Draw();
+        } catch (ArgumentOutOfRangeException err) {
+            // This is a hack to fix a bug where the console would crash when the window was resized
+            // while the game was running
+            const string CATCH_MSG = "The value must be greater than or equal to zero and less than the console's buffer size in that dimension";
+            if (err.Message.Contains(CATCH_MSG)) {
+                errScreen.Draw();
+                var pw = Console.WindowWidth;
+                var ph = Console.WindowHeight;
+                while (Console.WindowWidth == pw || Console.WindowHeight == ph) {
+                    Thread.Sleep(100);
+                }
+                TryDraw();
+            } else {
+                throw;
+            }
+
+        }
+    }
+}
+
+class ToSmallMessage : Screen {
+    public override int UpdateRate => 1000 / 10;
+    const string MESSAGE = "The window is too small!";
+    public override (int, int) Offset => GetCenter(MESSAGE.Length, 1);
+    public override void Draw() {
+        base.Draw();
+        Paint(0, 0, MESSAGE, ConsoleColor.Black, ConsoleColor.Red);
     }
 }

@@ -11,7 +11,15 @@
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
             "console": "externalTerminal",
-            "internalConsoleOptions": "neverOpen"
+            "internalConsoleOptions": "neverOpen",
+            "externalConsole": true,
+             "linux": {
+                "postDebugTask": "kill-term"
+             },
+            "env": {
+                "BLADE_SKIP_INTO": "1",
+                "BLADE_NO_SOUND": "1"
+            }
         }
     ],
     "compounds": []

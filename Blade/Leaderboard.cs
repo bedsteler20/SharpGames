@@ -50,6 +50,7 @@ public class LeaderboardMenu : Screen {
     public ConsoleColor bgColor = ConsoleColor.Red;
     public ConsoleColor txtColor = ConsoleColor.White;
     public ConsoleColor fgColor = ConsoleColor.Black;
+    public override int UpdateRate => 1000 / 10;
 
     const int MAX_NAME_LENGTH = 36;
     const int MAX_ENTRIES = 10;
