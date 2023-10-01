@@ -144,6 +144,16 @@ public class Game : Blade.Screen {
             case ConsoleKey.Escape:
                 Blade.ScreenManager.Back<Menu>();
                 break;
+            case ConsoleKey.Enter:
+                while (CanMove(0, 1)) {
+                    piecePos.y++;
+                }
+                break;
+            case ConsoleKey.Spacebar:
+                if (CanRotate()) {
+                    piece = Rotate(piece);
+                }
+                break;
         }
     }
 
