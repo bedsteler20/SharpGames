@@ -33,6 +33,7 @@ public class AudioPlayer {
 
     private void OnEndReached(object? sender, EventArgs e) {
         if (Repeat) {
+            player.Position = 0;
             player.Play();
         }
     }
