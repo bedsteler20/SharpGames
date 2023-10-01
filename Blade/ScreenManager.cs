@@ -56,7 +56,7 @@ public static class ScreenManager {
         });
         while (true) {
             CurrentScreen.Update();
-            TryDraw();
+            Task.Run(TryDraw);
             Thread.Sleep(CurrentScreen.UpdateRate);
         }
     }

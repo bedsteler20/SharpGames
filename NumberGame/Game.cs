@@ -5,11 +5,13 @@ public class Game : Blade.Screen {
     private readonly Random Rng = Blade.Utils.CreateRadom();
     private (int x, int y) PreviousSpawnLocation = (-1, -1);
 
+
+    public override int UpdateRate => 1000 / 5;
     private readonly Grid grid;
     private int score = 0;
-    private int BordSize;
+    private readonly int BordSize;
 
-    private Blade.Leaderboard Leaderboard;
+    private readonly Blade.Leaderboard Leaderboard;
 
     const int WIDTH = 50;
     const int HEIGHT = 18;

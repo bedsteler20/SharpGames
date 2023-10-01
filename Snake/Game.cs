@@ -18,6 +18,7 @@ public class Game : Blade.Screen {
 
     private readonly Random Rng = Blade.Utils.CreateRadom();
 
+    public override int UpdateRate => 1000 / 20; 
 
     private Direction Direction = Direction.Right;
     private int frame = 0;

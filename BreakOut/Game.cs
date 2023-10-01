@@ -14,6 +14,7 @@ public class Game : Blade.Screen {
     const int WIDTH = (BRICK_WIDTH + BRICK_GAP) * BRICKS_PER_ROW - 1;
 
     public override (int x, int y) Offset => GetCenter(WIDTH + 2, HEIGHT + 3);
+    public override int UpdateRate => 1000 / 10;
 
     private (int x, int y) paddlePosition = ((WIDTH / 2) - (PADDLE_WIDTH / 2), HEIGHT);
     private (int x, int y) ballPosition = ((WIDTH / 2) - (BALL_SIZE / 2), HEIGHT - 2);

@@ -40,10 +40,7 @@ public class Game : Blade.Screen {
                     continue;
                 }
                 var color = type.GetColor();
-                Paint(x * 3 + 1 + 1, y, "█", color);
-                Paint(x * 3 + 2 + 1, y, "█", color);
-                Paint(x * 3 + 3 + 1, y, "█", color);
-
+                Paint(x * 3 + 2, y, "███", color);
             }
         }
 
@@ -54,9 +51,7 @@ public class Game : Blade.Screen {
                     continue;
                 }
                 var color = type.GetColor();
-                Paint((piecePos.x + x) * 3 + 1 + 1, piecePos.y + y, "█", color);
-                Paint((piecePos.x + x) * 3 + 2 + 1, piecePos.y + y, "█", color);
-                Paint((piecePos.x + x) * 3 + 3 + 1, piecePos.y + y, "█", color);
+                Paint((piecePos.x + x) * 3 + 2, piecePos.y + y, "███", color);
 
             }
         }
@@ -145,6 +140,9 @@ public class Game : Blade.Screen {
                 if (CanRotate()) {
                     piece = Rotate(piece);
                 }
+                break;
+            case ConsoleKey.Escape:
+                Blade.ScreenManager.Back<Menu>();
                 break;
         }
     }
