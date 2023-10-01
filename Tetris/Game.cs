@@ -9,7 +9,7 @@ public class Game : Blade.Screen {
     private const int HEIGHT = BORD_HEIGHT - 2;
 
     public override (int x, int y) Offset => GetCenter(WIDTH, HEIGHT, -3, 0);
-    public override int UpdateRate => 1000 / 5;
+    public override int UpdateRate => 1000 / 20;
     private readonly Random rng = Blade.Utils.CreateRadom();
     private readonly Blade.AudioPlayer player = new();
     private readonly Blade.Leaderboard leaderboard;
@@ -18,7 +18,8 @@ public class Game : Blade.Screen {
     private PieceType[,] piece = new PieceType[4, 4];
     private (int x, int y) piecePos = (4, 2);
     private int score = 0;
-
+    private int frame = 0;
+    private int speed = 8;
 
     public Game(Blade.Leaderboard leaderboard) {
         this.leaderboard = leaderboard;
@@ -31,7 +32,6 @@ public class Game : Blade.Screen {
         base.Draw();
         Paint(3, 0, $"Score: {score}");
         DrawBorder(WIDTH, HEIGHT, 3, 1);
-
 
         for (int y = 0; y < BORD_HEIGHT; y++) {
             for (int x = 0; x < BOARD_WIDTH; x++) {
@@ -64,8 +64,11 @@ public class Game : Blade.Screen {
 
     public override void Update() {
         base.Update();
+        frame++;
         if (CanMove(0, 1)) {
-            piecePos.y++;
+            if (frame % speed == 0) {
+                piecePos.y++;
+            }
         } else {
             for (int py = 0; py < 4; py++) {
                 for (int px = 0; px < 4; px++) {
@@ -110,11 +113,14 @@ public class Game : Blade.Screen {
                 _ => 0
             };
         }
-        for (int x = 0; x < BOARD_WIDTH; x++) {
-            if (board[x, 0] != PieceType.E) {
-                GameOver();
-            }
-        }
+
+        speed = score > 7500 ? 1 :
+                score > 5000 ? 2 :
+                score > 2000 ? 3 :
+                score > 1500 ? 4 :
+                score > 1000 ? 5 :
+                score > 500 ? 6 :
+                score > 100 ? 7 : 8;
     }
 
     public override void OnKeyPress(ConsoleKeyInfo key) {
@@ -161,6 +167,9 @@ public class Game : Blade.Screen {
     private void SpawnPiece() {
         piece = ((PieceType)rng.Next(1, 8)).Generate();
         piecePos = (4, 2);
+        if (!CanMove(0, 1)) {
+            GameOver();
+        }
     }
 
 
