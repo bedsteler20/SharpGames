@@ -24,7 +24,7 @@ public class Game : Blade.Screen {
     public Game(Blade.Leaderboard leaderboard) {
         this.leaderboard = leaderboard;
         SpawnPiece();
-
+        player.Repeat = true;
         player.Play(Blade.Assets.GetPath("Tetris.ogg"));
     }
 
