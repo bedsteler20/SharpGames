@@ -36,7 +36,6 @@ public class Leaderboard {
 }
 
 public class AddScoreMenu : Screen {
-    public override UpdateStrategy updateStrategy => UpdateStrategy.Lazy;
     private readonly Leaderboard leaderboard;
 
     public AddScoreMenu(Leaderboard leaderboard) {
@@ -48,7 +47,6 @@ public class AddScoreMenu : Screen {
 }
 
 public class LeaderboardMenu : Screen {
-    public override UpdateStrategy updateStrategy => UpdateStrategy.Lazy;
     public ConsoleColor bgColor = ConsoleColor.Red;
     public ConsoleColor txtColor = ConsoleColor.White;
     public ConsoleColor fgColor = ConsoleColor.Black;

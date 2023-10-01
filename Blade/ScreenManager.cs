@@ -23,6 +23,7 @@ public static class ScreenManager {
     /// Removes the top screen from the screen stack.
     /// </summary>
     public static void Back() {
+        CurrentScreen.Dispose();
         screens.Pop();
     }
 

@@ -36,4 +36,7 @@ public abstract class Screen : Drawable {
     /// </summary>
     /// <param name="key">The key that was pressed.</param>
     public virtual void OnKeyPress(ConsoleKeyInfo key) { }
+
+
+    public virtual void Dispose() { }
 }

@@ -5,7 +5,6 @@ public delegate void TextBoxSubmitHandler(TextBox sender, string text);
 enum Focus { Cancel, Submit, Text }
 
 public class TextBox : Screen {
-    public override UpdateStrategy updateStrategy => UpdateStrategy.Lazy;
     public override bool ShowCursor => focus == Focus.Text;
     public override (int x, int y) Offset => GetCenter(Width, Height);
 

@@ -1,7 +1,6 @@
 namespace Blade;
 
 public class Intro : Screen {
-    public override UpdateStrategy updateStrategy => UpdateStrategy.Lazy;
 
     public required Action OnDone { get; set; }
 

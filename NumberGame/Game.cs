@@ -1,6 +1,5 @@
 ﻿namespace NumberGame;
 public class Game : Blade.Screen {
-    public override Blade.UpdateStrategy updateStrategy => Blade.UpdateStrategy.Lazy;
 
     private readonly Cell[][] Cells;
     private readonly Random Rng = Blade.Utils.CreateRadom();
