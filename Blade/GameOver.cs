@@ -6,6 +6,9 @@ class GameOver : Screen {
     public override (int x, int y) Offset => GetCenter(WIDTH, HEIGHT);
 
     public required virtual Action OnGameOver { get; set; }
+    public override int UpdateRate => 1000;
+
+    bool submitted = false;
 
     public override void Draw() {
         base.Draw();
@@ -20,7 +23,14 @@ class GameOver : Screen {
         Paint(0, 08, " ▟█▛ ▟█▛ ▟█▛ ▟█▛ ▟███▛   ▟█████▘      ", ConsoleColor.Red);
         Paint(0, 09, "▟█▛ ▟█▛  ▜█▙▟▛▘ ▟█▛     ▟█▛▘▟█▛       ", ConsoleColor.Red);
         Paint(0, 10, "▜███▛▘    ▜▛▘  ▟█████▛ ▟█▛ ▟█▛        ", ConsoleColor.Red);
-        Thread.Sleep(1000);
-        OnGameOver();
+    }
+
+    public override void Update() {
+        base.Update();
+        if (submitted) {
+            OnGameOver();
+
+        }
+        submitted = true;
     }
 }
